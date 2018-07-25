@@ -1,6 +1,9 @@
 'use strict';
 
 import express from 'express';
+const options = {
+  etag: true,
+};
 const router = express.Router();
 
 /**
@@ -18,7 +21,6 @@ router.param('model', models.finder);
  * models route -- returns a list of all possible models
  */
 router.get('/api/v1/models', (req,res,next) => {
-  console.log('Fetching Models');
   let list = models.list();
   sendJSON(res,list);
 });
