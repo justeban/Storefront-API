@@ -7,7 +7,6 @@ import cors from 'cors';
 
 // Custom Libraries
 import router from './api/api.js';
-import authRouter from './auth/router.js';
 
 // Custom Middleware
 import errorHandler from './middleware/error.js';
@@ -22,7 +21,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 // Our API Routes
-app.use(authRouter);
 app.use(router);
 
 // Errors and 404's
