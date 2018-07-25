@@ -1,10 +1,9 @@
 'use strict';
 
 import express from 'express';
-const options = {
-  etag: true,
-};
 const router = express.Router();
+
+const etag = require('etag');
 
 /**
  * @external String
@@ -13,7 +12,6 @@ const router = express.Router();
  */
 import * as models from '../middleware/models.js';
 router.param('model', models.finder);
-
 
 /**
  * @public
@@ -60,7 +58,10 @@ router.put('/api/v1/:model/:id', (req,res,next) => {
 let sendJSON = (res,data) => {
   res.statusCode = 200;
   res.statusMessage = 'OK';
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader({
+    'Content-Type': 'application/json',
+    'ETag': etag(data),
+  });
   res.write( JSON.stringify(data) );
   res.end();
 };
