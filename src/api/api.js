@@ -1,6 +1,9 @@
 'use strict';
 
 import express from 'express';
+const options = {
+  etag: true,
+};
 const router = express.Router();
 
 /**
