@@ -58,7 +58,7 @@ router.put('/api/v1/:model/:id', (req,res,next) => {
 let sendJSON = (res,data) => {
   res.statusCode = 200;
   res.statusMessage = 'OK';
-  res.setHeader({
+  res.set({
     'Content-Type': 'application/json',
     'ETag': etag(data),
   });
