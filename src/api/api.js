@@ -3,6 +3,8 @@
 import express from 'express';
 const router = express.Router();
 
+const etag = require('etag');
+
 /**
  * @external String
  * @see middleware/models.js
@@ -56,7 +58,10 @@ router.put('/api/v1/:model/:id', (req,res,next) => {
 let sendJSON = (res,data) => {
   res.statusCode = 200;
   res.statusMessage = 'OK';
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader({
+    'Content-Type': 'application/json',
+    'ETag': etag(data),
+  });
   res.write( JSON.stringify(data) );
   res.end();
 };
