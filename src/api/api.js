@@ -1,9 +1,6 @@
 'use strict';
 
 import express from 'express';
-const options = {
-  etag: true,
-};
 const router = express.Router();
 
 /**
@@ -13,7 +10,6 @@ const router = express.Router();
  */
 import * as models from '../middleware/models.js';
 router.param('model', models.finder);
-
 
 /**
  * @public
